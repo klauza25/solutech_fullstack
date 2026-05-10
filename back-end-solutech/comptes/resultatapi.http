@@ -1,0 +1,56 @@
+### ================================
+### AUTH
+### ================================
+
+@baseUrl = http://127.0.0.1:8000
+
+### Login (POST /api/auth/login/)
+POST {{baseUrl}}/api/auth/login/
+Content-Type: application/json
+{
+  "username": "japhet",
+  "password": "gloiregloire"
+}
+
+> {%%
+  // Astuce: remplacez ensuite @accessToken par l’access token reçu.
+%%}
+
+### Me (GET /api/auth/me/)
+@accessToken = "access":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc4MzQzNzk3LCJpYXQiOjE3NzgzNDM0OTcsImp0aSI6IjdiYWRmMTIyN2E0MzQ1OWE5MTBlZGM0NWI0ZWJmZDVhIiwidXNlcl9pZCI6IjIiLCJyb2xlIjoiRUxFVkUiLCJwaG9uZSI6IjA2NzgxMzc0MCJ9.gGLZMDE-KtvQLXkwU5L217Gy2sfXLp9duRYGFolQy10"
+
+GET {{baseUrl}}/api/auth/me/
+Authorization: Bearer {{accessToken}}
+
+
+### ================================
+### ECOLES / CLASSES
+### ================================
+
+### Classes (GET /api/ecoles/classes/)
+GET {{baseUrl}}/api/ecoles/classes/
+Authorization: Bearer {{accessToken}}
+
+###=====================
+
+
+curl -X GET http://127.0.0.1:8000/api/ecoles/classes/ \
+  -H "Authorization: Bearer VOTRE_ACCESS_TOKEN"
+
+
+
+###====
+
+curl -X POST http://127.0.0.1:8000/api/ecoles/classes/ \
+  -H "Authorization: Bearer VOTRE_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"nom": "6ème B", "niveau": "6EME", "ecole": 1}'
+
+
+
+###========
+
+curl -X POST http://127.0.0.1:8000/api/ecoles/ecoles/ \
+  -H "Authorization: Bearer VOTRE_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"nom": "Test", "code_mepsa": "INVALIDE", "type": "PUBLIC", "cycles": "COLLEGE", "region": "Brazzaville"}'
