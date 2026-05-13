@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('comptes.urls')),
     path("api/ecoles/", include("ecoles.urls")), 
-    
+    path("api/sync/", include("sync.urls")),  # 🔗 Monte le module offline
+    path("api/eleves/", include("eleves.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

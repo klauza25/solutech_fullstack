@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     # App Phase 0
     'comptes',
     'ecoles',
+    'sync',
+    'eleves',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.middleware.gzip.GZipMiddleware",  # ← Compression automatique des réponses > 200 octets
+    "django.contrib.sessions.middleware.SessionMiddleware",
 ]
+
+# Optionnel : exclure certaines routes de la compression (si sensibles)
+GZIP_EXCLUDE_PATHS = ["/api/auth/", "/admin/"]  # Tokens et admin non compressés
 
 ROOT_URLCONF = 'soluTech.urls'
 
@@ -106,6 +115,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+######### klauza add
+
+#LOGGING = {
+#    "version": 1,
+ #   "handlers": {
+  #      "console": {"class": "logging.StreamHandler", "formatter": "verbose"}
+   # },
+    #"loggers": {
+     #   "apps.sync": {"handlers": ["console"], "level": "WARNING"}
+    #}
+#}
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
